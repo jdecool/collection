@@ -1,0 +1,29 @@
+{
+    "name": "jdecool/collection",
+    "description": "Just an another collections library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jérémy DECOOL",
+            "email": "contact@jdecool.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "JDecool\\Collection\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JDecool\\Collection\\Tests\\Units\\": "tests/units"
+        }
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "atoum/atoum": "^2.8",
+        "atoum/stubs": "^2.5"
+    }
+}
