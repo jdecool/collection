@@ -31,6 +31,19 @@ class Collection
     }
 
     /**
+     * Applies the callback to the elements of the given arrays
+     *
+     * @param callable $callback
+     * @return Collection
+     */
+    public function map(callable $callback)
+    {
+        $items = array_map($callback, $this->items);
+
+        return new static($items);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items
