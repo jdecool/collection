@@ -131,4 +131,26 @@ class Collection extends atoum
             [['foo', 'bar'], 1, true],
         ];
     }
+
+    /**
+     * @dataProvider getIsEmptyDataProvider
+     */
+    public function testIsEmpty($items, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->boolean($this->testedInstance->isEmpty())
+                    ->isEqualTo($expected)
+        ;
+    }
+
+    public function getIsEmptyDataProvider()
+    {
+        return [
+            [[], true],
+            [['foo' => 'bar'], false],
+            [['foo', 'bar'], false],
+        ];
+    }
 }

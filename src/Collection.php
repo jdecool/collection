@@ -66,6 +66,16 @@ class Collection
     }
 
     /**
+     * Check if the collection is empty
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->items);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items
