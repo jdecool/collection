@@ -55,6 +55,17 @@ class Collection
     }
 
     /**
+     * Determine if a key exists in the collection
+     *
+     * @param mixed $key
+     * @return bool
+     */
+    public function has($key)
+    {
+        return isset($this->items[$key]);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items

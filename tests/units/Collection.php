@@ -105,4 +105,30 @@ class Collection extends atoum
             [['foo', 'bar'], 'toto', false],
         ];
     }
+
+    /**
+     * @dataProvider getHasDataProvider
+     */
+    public function testHas($items, $key, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->boolean($this->testedInstance->has($key))
+                    ->isEqualTo($expected)
+        ;
+    }
+
+    public function getHasDataProvider()
+    {
+        return [
+            [[], '', false],
+            [['foo' => 'bar'], 'foo', true],
+            [['foo' => 'bar'], 'bar', false],
+            [['foo', 'bar'], 'foo', false],
+            [['foo', 'bar'], 'bar', false],
+            [['foo', 'bar'], 0, true],
+            [['foo', 'bar'], 1, true],
+        ];
+    }
 }
