@@ -44,6 +44,17 @@ class Collection
     }
 
     /**
+     * Determine if an item exists in the collection
+     *
+     * @param mixed $value
+     * @return bool
+     */
+    public function contains($value)
+    {
+        return in_array($value, $this->items);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items

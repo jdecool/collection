@@ -80,4 +80,29 @@ class Collection extends atoum
 
         return $dataSet;
     }
+
+    /**
+     * @dataProvider getContainsDataProvider
+     */
+    public function testContains($items, $search, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->boolean($this->testedInstance->contains($search))
+                    ->isEqualTo($expected)
+        ;
+    }
+
+    public function getContainsDataProvider()
+    {
+        return [
+            [[], '', false],
+            [['foo' => 'bar'], 'foo', false],
+            [['foo' => 'bar'], 'bar', true],
+            [['foo', 'bar'], 'foo', true],
+            [['foo', 'bar'], 'bar', true],
+            [['foo', 'bar'], 'toto', false],
+        ];
+    }
 }
