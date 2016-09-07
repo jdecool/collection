@@ -33,6 +33,28 @@ class Collection extends atoum
     }
 
     /**
+     * @dataProvider getKeysDataProvider
+     */
+    public function testKeys($items, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+               ->object($this->testedInstance->keys())
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo($expected)
+        ;
+    }
+
+    public function getKeysDataProvider()
+    {
+        return [
+            [[], new TestedClass()],
+            [['foo' => 'bar', 'john' => 'doe'], new TestedClass(['foo', 'john'])],
+        ];
+    }
+
+    /**
      * @dataProvider getMapDataProvider
      */
     public function testMap($items, $callback, $expected)

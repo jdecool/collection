@@ -31,6 +31,18 @@ class Collection
     }
 
     /**
+     * Get all keys of the collection
+     *
+     * @return Collection
+     */
+    public function keys()
+    {
+        $keys = array_keys($this->items);
+
+        return new static($keys);
+    }
+
+    /**
      * Applies the callback to the elements of the given arrays
      *
      * @param callable $callback
