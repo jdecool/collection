@@ -174,4 +174,86 @@ class Collection extends atoum
                     ->isEqualTo(new TestedClass([0 => 'a', 3 => 'd']))
         ;
     }
+
+    /**
+     * @dataProvider getFirstDataProvider
+     */
+    public function testFirst($items, $callback, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->variable($this->testedInstance->first($callback))
+                    ->isIdenticalTo($expected)
+        ;
+    }
+
+    public function getFirstDataProvider()
+    {
+        $dataSet = [];
+
+        // first value without callback
+        $dataSet[] = [
+            [0, 1, 2, 3, 1],
+            null,
+            0,
+        ];
+
+        // first value with callback
+        $dataSet[] = [
+            [0, 1, 2, 1, 3],
+            function($item) { return $item == 1; },
+            1,
+        ];
+
+        // search for first value corresponding to parameter
+        $dataSet[] = [
+            [['a' => '1', 'foo' => 'a'], ['a' => '2', 'foo' => 'b'], ['a' => '3', 'foo' => 'c'], ['a' => '4', 'foo' => 'b']],
+            function($item) { return $item['foo'] == 'b'; },
+            ['a' => '2', 'foo' => 'b'],
+        ];
+
+        return $dataSet;
+    }
+
+    /**
+     * @dataProvider getLastDataProvider
+     */
+    public function testLast($items, $callback, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+               ->variable($this->testedInstance->last($callback))
+                    ->isIdenticalTo($expected)
+        ;
+    }
+
+    public function getLastDataProvider()
+    {
+        $dataSet = [];
+
+        // last value without callback
+        $dataSet[] = [
+            [0, 1, 2, 3, 4],
+            null,
+            4,
+        ];
+
+        // last value with callback
+        $dataSet[] = [
+            [0, 1, 2, 3, 4],
+            function($item) { return $item == 1; },
+            1,
+        ];
+
+        // search for last value corresponding to parameter
+        $dataSet[] = [
+            [['a' => '1', 'foo' => 'a'], ['a' => '2', 'foo' => 'b'], ['a' => '3', 'foo' => 'c'], ['a' => '4', 'foo' => 'b']],
+            function($item) { return $item['foo'] == 'b'; },
+            ['a' => '4', 'foo' => 'b'],
+        ];
+
+        return $dataSet;
+    }
 }

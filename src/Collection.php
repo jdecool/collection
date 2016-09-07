@@ -89,6 +89,40 @@ class Collection
     }
 
     /**
+     * Search first element
+     *
+     * @param callable|null $callback
+     * @param mixed         $default
+     * @return mixed
+     */
+    public function first(callable $callback = null, $default = null)
+    {
+        if (null === $callback) {
+            return reset($this->items);
+        }
+
+        return $this->searchFirst($this->items, $callback, $default);
+    }
+
+    /**
+     * Search last element
+     *
+     * @param callable|null $callback
+     * @param mixed         $default
+     * @return mixed
+     */
+    public function last(callable $callback = null, $default = null)
+    {
+        if (null === $callback) {
+            return end($this->items);
+        }
+
+        $items = array_reverse($this->items, true);
+
+        return $this->searchFirst($items, $callback, $default);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items
@@ -107,5 +141,24 @@ class Collection
         }
 
         return (array) $items;
+    }
+
+    /**
+     * Search first element corresponding to callback
+     *
+     * @param array    $items
+     * @param callable $callback
+     * @param mixed    $default
+     * @return mixed
+     */
+    private function searchFirst(array $items, callable $callback, $default = null)
+    {
+        foreach ($items as $item) {
+            if ($callback($item)) {
+                return $item;
+            }
+        }
+
+        return $default;
     }
 }
