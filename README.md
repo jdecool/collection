@@ -52,6 +52,8 @@ $collection->first(); // ['a' => '1', 'foo' => 'a']
 $collection->first(function($item) {
     return $item['foo'] === 'b';
 }); // ['a' => '2', 'foo' => 'b']
+
+$collection->first(/* ... */, 'default value if not found')
 ```
 
 ### has
@@ -99,6 +101,8 @@ $collection->last(); // ['a' => '3', 'foo' => 'c']
 $collection->last(function($item) {
     return $item['foo'] === 'b';
 }); // ['a' => '4', 'foo' => 'b']
+
+$collection->last(/* ... */, 'default value if not found')
 ```
 
 ### map
