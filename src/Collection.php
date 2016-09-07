@@ -76,6 +76,19 @@ class Collection
     }
 
     /**
+     * Filter the collection
+     *
+     * @param callable $callback
+     * @return Collection
+     */
+    public function filter(callable $callback)
+    {
+        $items = array_filter($this->items, $callback);
+
+        return new static($items);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items

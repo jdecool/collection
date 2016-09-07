@@ -153,4 +153,25 @@ class Collection extends atoum
             [['foo', 'bar'], false],
         ];
     }
+
+    public function testFilter()
+    {
+        $this
+            ->if($this->newTestedInstance([0, 1, 2, 3]))
+            ->then
+                ->object($this->testedInstance->filter(function($item) {
+                    return $item >= 2;
+                }))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass([2 => 2, 3 => 3]))
+
+            ->if($this->newTestedInstance(['a', 'b', 'c', 'd']))
+            ->then
+                ->object($this->testedInstance->filter(function($item) {
+                    return in_array($item, ['a', 'd']);
+                }))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass([0 => 'a', 3 => 'd']))
+        ;
+    }
 }
