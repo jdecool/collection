@@ -147,6 +147,22 @@ class Collection
     }
 
     /**
+     * Get an item from the collection
+     *
+     * @param mixed $key
+     * @param mixed $default
+     * @return mixed
+     */
+    public function get($key, $default = null)
+    {
+        if (isset($this->items[$key])) {
+            return $this->items[$key];
+        }
+
+        return $default;
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items

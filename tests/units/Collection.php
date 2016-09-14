@@ -306,4 +306,38 @@ class Collection extends atoum
             ],
         ];
     }
+
+    /**
+     * @dataProvider getGetDataProvider
+     */
+    public function testGet($items, $key, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->variable($this->testedInstance->get($key))
+                    ->isEqualTo($expected)
+        ;
+    }
+
+    public function getGetDataProvider()
+    {
+        return [
+            [
+                ['foo' => 'bar', 'john' => 'doe'],
+                'foo',
+                'bar'
+            ],
+            [
+                ['foo' => 'bar', 'john' => 'doe'],
+                'myKey',
+                null
+            ],
+            [
+                [10, 20, 30, 40],
+                0,
+                10
+            ],
+        ];
+    }
 }

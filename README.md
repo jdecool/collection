@@ -65,6 +65,17 @@ $collection = new Collection(['foo' => 'bar', 'john' => 'doe']);
 $collection->flip(); // Collection(['bar' => 'foo', 'doe' => 'john'])
 ```
 
+### get
+
+Get an item from the collection
+
+```php
+$collection = new Collection(['foo' => 'bar', 'john' => 'doe']);
+$collection->get('foo'); // 'bar'
+$collection->get('bar'); // null
+$collection->get('bar', 'myDefaultValue'); // 'myDefaultValue'
+```
+
 ### has
 
 Determine if a key exists in the collection
