@@ -56,6 +56,15 @@ $collection->first(function($item) {
 $collection->first(/* ... */, 'default value if not found')
 ```
 
+### flip
+
+Exchanges all keys with their associated values in an array
+
+```php
+$collection = new Collection(['foo' => 'bar', 'john' => 'doe']);
+$collection->flip(); // Collection(['bar' => 'foo', 'doe' => 'john'])
+```
+
 ### has
 
 Determine if a key exists in the collection

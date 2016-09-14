@@ -135,6 +135,18 @@ class Collection
     }
 
     /**
+     * Exchanges all keys with their associated values in an array
+     *
+     * @return Collection
+     */
+    public function flip()
+    {
+        $items = array_flip($this->items);
+
+        return new static($items);
+    }
+
+    /**
      * Convert $items parameter into an items array
      *
      * @param mixed $items

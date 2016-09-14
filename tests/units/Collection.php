@@ -278,4 +278,32 @@ class Collection extends atoum
 
         return $dataSet;
     }
+
+    /**
+     * @dataProvider getFlipDataProvider
+     */
+    public function testFlip($items, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->object($this->testedInstance->flip())
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo($expected)
+        ;
+    }
+
+    public function getFlipDataProvider()
+    {
+        return [
+            [
+                ['foo' => 'bar', 'john' => 'doe'],
+                new TestedClass(['bar' => 'foo', 'doe' => 'john']),
+            ],
+            [
+                [10, 20, 30, 40],
+                new TestedClass([10 => 0, 20 => 1, 30 => 2, 40 => 3]),
+            ],
+        ];
+    }
 }
