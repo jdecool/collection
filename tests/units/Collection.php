@@ -367,4 +367,23 @@ class Collection extends atoum
                     ->isEqualTo(2)
         ;
     }
+
+    public function testJsonSerializable()
+    {
+        $this
+            ->if($this->newTestedInstance(['foo' => 'bar', 'john' => 'doe']))
+            ->then
+                ->string(json_encode($this->testedInstance))
+                    ->isEqualTo('{"foo":"bar","john":"doe"}')
+
+            ->given(
+                $obj = new \mock\JsonSerializable(),
+                $obj->getMockController()->jsonSerialize = function () { return ['john' => 'doe']; }
+            )
+            ->if($this->newTestedInstance(['foo' => 'bar', 'users' => $obj]))
+            ->then
+                ->string(json_encode($this->testedInstance))
+                    ->isEqualTo('{"foo":"bar","users":{"john":"doe"}}')
+        ;
+    }
 }

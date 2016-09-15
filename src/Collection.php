@@ -5,7 +5,7 @@ namespace JDecool\Collection;
 use JsonSerializable;
 use Traversable;
 
-class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
+class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonSerializable
 {
     /** @var array */
     private $items;
@@ -212,6 +212,20 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return array_map(function ($value) {
+            if ($value instanceof \JsonSerializable) {
+                return $value->jsonSerialize();
+            }
+
+            return $value;
+        }, $this->items);
     }
 
     /**
