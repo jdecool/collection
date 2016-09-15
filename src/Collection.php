@@ -5,7 +5,7 @@ namespace JDecool\Collection;
 use JsonSerializable;
 use Traversable;
 
-class Collection implements \ArrayAccess
+class Collection implements \ArrayAccess, \Countable
 {
     /** @var array */
     private $items;
@@ -196,6 +196,14 @@ class Collection implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->items[$offset]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function count()
+    {
+        return count($this->items);
     }
 
     /**

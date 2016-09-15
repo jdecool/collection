@@ -352,4 +352,19 @@ class Collection extends atoum
                     ->isEqualTo('doe')
         ;
     }
+
+    public function testCountable()
+    {
+        $this
+            ->if($this->newTestedInstance([]))
+            ->then
+                ->integer(count($this->testedInstance))
+                    ->isEqualTo(0)
+
+            ->if($this->newTestedInstance(['foo' => 'bar', 'john' => 'doe']))
+            ->then
+               ->integer(count($this->testedInstance))
+                    ->isEqualTo(2)
+        ;
+    }
 }
