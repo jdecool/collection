@@ -5,7 +5,7 @@ namespace JDecool\Collection;
 use JsonSerializable;
 use Traversable;
 
-class Collection implements \ArrayAccess, \Countable
+class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /** @var array */
     private $items;
@@ -204,6 +204,14 @@ class Collection implements \ArrayAccess, \Countable
     public function count()
     {
         return count($this->items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->items);
     }
 
     /**
