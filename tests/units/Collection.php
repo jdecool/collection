@@ -340,4 +340,16 @@ class Collection extends atoum
             ],
         ];
     }
+
+    public function testArrayAccess()
+    {
+        $this
+            ->if($this->newTestedInstance(['foo' => 'bar', 'john' => 'doe']))
+            ->then
+                ->string($this->testedInstance['foo'])
+                    ->isEqualTo('bar')
+                ->string($this->testedInstance['john'])
+                    ->isEqualTo('doe')
+        ;
+    }
 }

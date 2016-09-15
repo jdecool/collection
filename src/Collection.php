@@ -5,7 +5,7 @@ namespace JDecool\Collection;
 use JsonSerializable;
 use Traversable;
 
-class Collection
+class Collection implements \ArrayAccess
 {
     /** @var array */
     private $items;
@@ -160,6 +160,42 @@ class Collection
         }
 
         return $default;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetGet($offset)
+    {
+        return $this->items[$offset];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        if (null === $offset) {
+            $this->items = $value;
+        } else {
+            $this->items[$offset] = $value;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->items[$offset]);
     }
 
     /**
