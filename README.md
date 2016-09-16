@@ -135,3 +135,31 @@ $collection->map(function($item) {
     return $item + 10;
 }); // Collection([10, 11, 12, 13])
 ```
+
+### reduce
+
+Reduce the array to a single value
+
+```php
+function sum($carray, $item)
+{
+    return $carray + $item;
+}
+
+$collection = new Collection([0, 1, 2, 3]);
+$collection->reduce('sum'); // 6
+
+$collection = new Collection([
+    [
+        'note'  => 5,
+        'coeff' => 1,
+    ],
+    [
+        'note'  => 8,
+        'coeff' => 2,
+    ],
+]);
+$collection->reduce(function ($carry, $item) {
+    return $carry + $item['note'];
+}); // 13
+```

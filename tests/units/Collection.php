@@ -386,4 +386,43 @@ class Collection extends atoum
                     ->isEqualTo('{"foo":"bar","users":{"john":"doe"}}')
         ;
     }
+
+    public function testReduce()
+    {
+        $this
+            ->if($this->newTestedInstance([0, 1, 2, 3]))
+            ->then
+                ->integer($this->testedInstance->reduce('JDecool\Collection\Tests\Units\sum'))
+                    ->isEqualTo(6)
+                ->integer($this->testedInstance->reduce(function ($carry, $item) {
+                    return $carry + $item;
+                }))
+                    ->isEqualTo(6)
+                ->integer($this->testedInstance->reduce(function ($carry, $item) {
+                    return $carry + $item;
+                }, 15))
+                    ->isEqualTo(21)
+
+            ->if($this->newTestedInstance([
+                [
+                    'note'  => 5,
+                    'coeff' => 1,
+                ],
+                [
+                    'note'  => 8,
+                    'coeff' => 2,
+                ],
+            ]))
+            ->then
+                ->integer($this->testedInstance->reduce(function ($carry, $item) {
+                    return $carry + $item['note'];
+                }))
+                    ->isEqualTo(13)
+        ;
+    }
+}
+
+function sum($carry, $item)
+{
+    return $carry + $item;
 }

@@ -147,6 +147,18 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
     }
 
     /**
+     * Reduce the array to a single value
+     *
+     * @param callable $callback
+     * @param mixed    $initial
+     * @return mixed
+     */
+    public function reduce(callable $callback, $initial = null)
+    {
+        return array_reduce($this->items, $callback, $initial);
+    }
+
+    /**
      * Get an item from the collection
      *
      * @param mixed $key
