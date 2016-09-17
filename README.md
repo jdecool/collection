@@ -24,6 +24,18 @@ $collection->contains(1); // true
 $collection->contains(5); // false
 ```
 
+### count
+
+Count the number of items in the collection
+
+```php
+$collection = new Collection();
+$collection->count(); // 0
+
+$collection = new Collection([0, 1, 2, 3]);
+$collection->count(); // 4
+```
+
 ### filter
 
 Filter the collection
