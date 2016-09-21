@@ -175,3 +175,19 @@ $collection->reduce(function ($carry, $item) {
     return $carry + $item['note'];
 }); // 13
 ```
+
+# reject
+
+Create a collection without elements
+
+```php
+$collection = new Collection([0, 1, 2, 3]);
+$collection->reject(function($item) {
+    return $item === 1;
+}); // Collection([0, 2, 3])
+
+$collection = new Collection(['foo' => 'bar', 'john' => 'doe', 'test' => 'bar']);
+$collection->reject(function($item) {
+    return $item === 'bar';
+}); // Collection(['john' => 'doe'])
+```

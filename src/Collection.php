@@ -175,6 +175,25 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
     }
 
     /**
+     * Create a collection without elements
+     *
+     * @param mixed $callback
+     * @return Collection
+     */
+    public function reject($callback)
+    {
+        if (is_callable($callback)) {
+            return $this->filter(function ($item) use ($callback) {
+                return !$callback($item);
+            });
+        }
+
+        return $this->filter(function ($item) use ($callback) {
+            return $item != $callback;
+        });
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)

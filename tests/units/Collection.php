@@ -427,6 +427,41 @@ class Collection extends atoum
                     ->isEqualTo(13)
         ;
     }
+
+    /**
+     * @dataProvider getRejectDataProvider
+     */
+    public function testReject($items, $callback, $expected)
+    {
+        $this
+            ->if($this->newTestedInstance($items))
+            ->then
+                ->object($result = $this->testedInstance->reject($callback))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass($expected))
+        ;
+    }
+
+    public function getRejectDataProvider()
+    {
+        return [
+            [
+                [0, 1, 2, 3],
+                1,
+                [0 => 0, 2 => 2, 3 => 3],
+            ],
+            [
+                [0, 1, 2, 3],
+                function ($item) { return 1 == $item; },
+                [0 => 0, 2 => 2, 3 => 3],
+            ],
+            [
+                [['note'  => 5, 'coeff' => 1], ['note'  => 0, 'coeff' => 1], ['note'  => 9, 'coeff' => 1], ['note'  => 2, 'coeff' => 1]],
+                function ($item) { return $item['note'] < 5; },
+                [0 => ['note'  => 5, 'coeff' => 1], 2 => ['note'  => 9, 'coeff' => 1]],
+            ],
+        ];
+    }
 }
 
 function sum($carry, $item)
