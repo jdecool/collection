@@ -194,6 +194,13 @@ class Collection extends atoum
                 }))
                     ->isInstanceOf('JDecool\Collection\Collection')
                     ->isEqualTo(new TestedClass([0 => 'a', 3 => 'd']))
+
+            ->if($this->newTestedInstance([['note'  => 5, 'coeff' => 1], ['note'  => 0, 'coeff' => 1], ['note'  => 9, 'coeff' => 1], ['note'  => 2, 'coeff' => 1]]))
+            ->then
+                ->object($this->testedInstance->filter(function($item) {
+                    return 5 <= $item['note'];
+                }))
+                    ->isInstanceOf('JDecool\Collection\Collection')
         ;
     }
 
