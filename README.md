@@ -1,6 +1,9 @@
 Collection
 ==========
 
+[![Build Status](https://travis-ci.org/jdecool/collection.svg?branch=master)](https://travis-ci.org/jdecool/collection)
+[![Latest Stable Version](https://poser.pugx.org/jdecool/collection/v/stable.png)](https://packagist.org/packages/jdecool/collection)
+
 Provide a fluent collection library.
 
 ## Available methods
@@ -176,7 +179,7 @@ $collection->reduce(function ($carry, $item) {
 }); // 13
 ```
 
-# reject
+### reject
 
 Create a collection without elements
 
