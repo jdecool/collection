@@ -205,6 +205,17 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
     }
 
     /**
+     * Computes the difference of keys in the collection
+     *
+     * @param mixed $items
+     * @return Collection
+     */
+    public function diffKeys($items)
+    {
+        return new static(array_diff_key($this->items, $this->getArrayableItems($items)));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)
