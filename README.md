@@ -39,6 +39,18 @@ $collection = new Collection([0, 1, 2, 3]);
 $collection->count(); // 4
 ```
 
+### diff
+
+Computes the difference of items in the collection
+
+```php
+$collection = new Collection(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']);
+$collection->diff('foo'); // Collection(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe'])
+
+$collection = new Collection(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']);
+$collection->diff('doe'); // Collection(['foo' => 'bar'])
+```
+
 ### filter
 
 Filter the collection

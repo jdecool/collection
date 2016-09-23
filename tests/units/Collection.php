@@ -462,6 +462,23 @@ class Collection extends atoum
             ],
         ];
     }
+
+    public function testDiff()
+    {
+        $this
+            ->if($this->newTestedInstance(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+            ->then
+                ->object($this->testedInstance->diff('foo'))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+                ->object($this->testedInstance->diff('doe'))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['foo' => 'bar']))
+                ->object($this->testedInstance->diff(['doe']))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['foo' => 'bar']))
+        ;
+    }
 }
 
 function sum($carry, $item)
