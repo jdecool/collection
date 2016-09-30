@@ -479,6 +479,23 @@ class Collection extends atoum
                     ->isEqualTo(new TestedClass(['foo' => 'bar']))
         ;
     }
+
+    public function testDiffKeys()
+    {
+        $this
+            ->if($this->newTestedInstance(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+            ->then
+                ->object($this->testedInstance->diffKeys('foo'))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+                ->object($this->testedInstance->diffKeys(['foo' => 'foo']))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['john' => 'doe', 'jane' => 'doe']))
+                ->object($this->testedInstance->diffKeys(['doe' => 'john']))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+        ;
+    }
 }
 
 function sum($carry, $item)
