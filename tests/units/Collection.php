@@ -496,6 +496,35 @@ class Collection extends atoum
                     ->isEqualTo(new TestedClass(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
         ;
     }
+
+    public function testSort()
+    {
+        $this
+            ->if($this->newTestedInstance([46, 6, 24, 43, 27, 41]))
+            ->then
+                ->object($this->testedInstance->sort())
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass([1 => 6, 2 => 24, 4 => 27, 5 => 41, 3 => 43, 0 => 46]))
+
+            ->if($this->newTestedInstance(['a' => 46, 'b' => 6, 'c' => 24, 'd' => 43, 'e' => 27, 'f' => 41]))
+            ->then
+                ->object($this->testedInstance->sort())
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['b' => 6, 'c' => 24, 'e' => 27, 'f' => 41, 'd' => 43, 'a' => 46]))
+
+            ->if($this->newTestedInstance([46, 6, 24, 43, 27, 41]))
+            ->then
+                ->object($this->testedInstance->sort(function($a, $b) {
+                    if ($a == $b) {
+                        return 0;
+                    }
+
+                    return ($a < $b) ? 1 : -1;
+                }))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass([0 => 46, 3 => 43, 5 => 41, 4 => 27, 2 => 24, 1 => 6]))
+        ;
+    }
 }
 
 function sum($carry, $item)

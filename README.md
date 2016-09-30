@@ -218,3 +218,21 @@ $collection->reject(function($item) {
     return $item === 'bar';
 }); // Collection(['john' => 'doe'])
 ```
+
+### sort
+
+Sort the items
+
+```php
+$collection = new Collection([3, 0, 2, 1]);
+$collection->sort(); // Collection([0, 1, 2, 3])
+
+$collection = new Collection(['foo' => 'bar', 'john' => 'doe', 'test' => 'bar']);
+$collection->reject(function($a, $b) {
+    if ($a == $b) {
+        return 0;
+    }
+
+    return ($a < $b) ? 1 : -1;
+}); // Collection([3, 2, 1, 0])
+```

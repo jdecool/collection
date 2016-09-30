@@ -216,6 +216,25 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
     }
 
     /**
+     * Sort the items
+     *
+     * @param callable $callback
+     * @return Collection
+     */
+    public function sort(callable $callback = null)
+    {
+        $items = $this->items;
+
+        if (null === $callback) {
+            asort($items);
+        } else {
+            uasort($items, $callback);
+        }
+
+        return new static($items);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)
