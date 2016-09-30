@@ -2,6 +2,7 @@ Collection
 ==========
 
 [![Build Status](https://travis-ci.org/jdecool/collection.svg?branch=master)](https://travis-ci.org/jdecool/collection)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/jdecool/collection?svg=true)](https://ci.appveyor.com/project/jdecool/collection)
 [![Latest Stable Version](https://poser.pugx.org/jdecool/collection/v/stable.png)](https://packagist.org/packages/jdecool/collection)
 
 Provide a fluent collection library.
