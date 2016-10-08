@@ -39,4 +39,4 @@ install:
 
 test_script:
     - cd C:\projects\collection
-    - php vendor\bin\atoum +verbose
+    - vendor\bin\atoum.bat +verbose
