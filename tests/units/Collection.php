@@ -525,6 +525,39 @@ class Collection extends atoum
                     ->isEqualTo(new TestedClass([0 => 46, 3 => 43, 5 => 41, 4 => 27, 2 => 24, 1 => 6]))
         ;
     }
+
+    /**
+     * @dataProvider getReverseDataProvider
+     */
+    public function testReverse($items, $expected)
+    {
+        $this
+            ->given($this->newTestedInstance([1, 2, 3]))
+            ->then
+                ->object($this->testedInstance->reverse())
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass([3, 2, 1]))
+        ;
+    }
+
+    public function getReverseDataProvider()
+    {
+        $foo = new \stdClass(); $foo->prop = 'foo';
+        $bar = new \stdClass(); $bar->prop = 'bar';
+        $obj = new \stdClass(); $obj->prop = 'obj';
+        $cla = new \stdClass(); $obj->prop = 'cla';
+
+        return [
+            [
+                [1, 2, 3],
+                [3, 2, 2],
+            ],
+            [
+                [$foo, $bar, $obj, $cla],
+                [$cla, $obj, $bar, $foo],
+            ],
+        ];
+    }
 }
 
 function sum($carry, $item)

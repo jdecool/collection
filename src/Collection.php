@@ -2,10 +2,13 @@
 
 namespace JDecool\Collection;
 
+use ArrayAccess;
+use Countable;
+use IteratorAggregate;
 use JsonSerializable;
 use Traversable;
 
-class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonSerializable
+class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSerializable
 {
     /** @var array */
     private $items;
@@ -232,6 +235,16 @@ class Collection implements \ArrayAccess, \Countable, \IteratorAggregate, \JsonS
         }
 
         return new static($items);
+    }
+
+    /**
+     * Reverse the collection items
+     *
+     * @return Collection
+     */
+    public function reverse()
+    {
+        return new static(array_reverse($this->items));
     }
 
     /**
