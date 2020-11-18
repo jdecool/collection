@@ -24,6 +24,19 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     }
 
     /**
+     * Add an item to the collection
+     *
+     * @param mixed $item
+     * @return Collection
+     */
+    public function add($item)
+    {
+        $this->items[] = $item;
+
+        return $this;
+    }
+
+    /**
      * Get all items of the collection
      *
      * @return array

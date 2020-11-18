@@ -8,6 +8,26 @@ use SplFixedArray;
 
 class Collection extends atoum
 {
+    public function testAdd()
+    {
+        $this
+            ->if($this->newTestedInstance())
+            ->then
+                ->array($this->testedInstance->all())
+                    ->isEmpty()
+
+            ->if($this->newTestedInstance())
+            ->given(
+                $this->testedInstance->add(1),
+                $this->testedInstance->add(2),
+                $this->testedInstance->add(3)
+            )
+            ->then
+                ->array($this->testedInstance->all())
+                    ->isEqualTo([1, 2, 3])
+        ;
+    }
+
     /**
      * @dataProvider getAllDataProvider
      */
