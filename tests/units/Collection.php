@@ -480,6 +480,29 @@ class Collection extends atoum
         ;
     }
 
+    public function testDiffUsing()
+    {
+        $this
+            ->if($this->newTestedInstance(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+            ->then
+                ->object($this->testedInstance->diff('foo', static function($a, $b) {
+                    return $a === $b;
+                }))
+                    ->isInstanceOf('JDecool\Collection\Collection')
+                    ->isEqualTo(new TestedClass(['foo' => 'bar', 'john' => 'doe', 'jane' => 'doe']))
+            ->object($this->testedInstance->diff('doe', static function($a, $b) {
+                    return $a === $b;
+                }))
+                ->isInstanceOf('JDecool\Collection\Collection')
+                ->isEqualTo(new TestedClass(['foo' => 'bar']))
+            ->object($this->testedInstance->diff(['doe'], static function($a, $b) {
+                    return $a === $b;
+                }))
+                ->isInstanceOf('JDecool\Collection\Collection')
+                ->isEqualTo(new TestedClass(['foo' => 'bar']))
+        ;
+    }
+
     public function testDiffKeys()
     {
         $this

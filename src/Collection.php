@@ -208,6 +208,18 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate, JsonSeria
     }
 
     /**
+     * Computes the difference of items in the collection based on callback
+     *
+     * @param mixed $items
+     * @param callable $callback
+     * @return Collection
+     */
+    public function diffUsing($items, callable $callback)
+    {
+        return new static(array_udiff($this->items, $this->getArrayableItems($items), $callback));
+    }
+
+    /**
      * Computes the difference of keys in the collection
      *
      * @param mixed $items
