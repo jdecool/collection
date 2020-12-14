@@ -1,13 +1,12 @@
 Collection
 ==========
 
-[![Build Status](https://travis-ci.org/jdecool/collection.svg?branch=master)](https://travis-ci.org/jdecool/collection)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/jdecool/collection?svg=true)](https://ci.appveyor.com/project/jdecool/collection)
+[![Build Status](https://github.com/jdecool/collection/workflows/CI/badge.svg)](https://github.com/jdecool/collection/actions?query=workflow%3ACI)
 [![Latest Stable Version](https://poser.pugx.org/jdecool/collection/v/stable.png)](https://packagist.org/packages/jdecool/collection)
 
 Provide a fluent collection library.
 
-## Available methods
+## Available methods
 
 ### all
 
@@ -18,7 +17,7 @@ $collection = new Collection([0, 1, 2, 3]);
 $collection->all(); // [0, 1, 2, 3]
 ```
 
-### contains
+### contains
 
 Determine if an item exists in the collection
 
